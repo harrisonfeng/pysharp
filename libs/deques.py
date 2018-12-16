@@ -14,7 +14,7 @@ def tail(filename, n=0):
     :return: A deque contained lines tailed.
     :rtype: deque
     """
-    
+
     if not os.path.exists(filename):
         raise OSError('The given file is not existing.')
 
