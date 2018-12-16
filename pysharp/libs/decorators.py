@@ -14,3 +14,26 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+
+import time
+import logging
+
+from functools import wraps
+
+
+LOG = logging.getLogger(__name__)
+
+
+def time_func(f):
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        st = time.time()
+        rf = f(*args, **kwargs)
+        et = time.time()
+        LOG.info("The execution duration of {0}: {1}".format(
+            rf.__name__,
+            et - st)
+        )
+        return rf
+    return wrapper
