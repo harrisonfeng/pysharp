@@ -18,6 +18,9 @@
 """pysharp.libs.utils module for various useful utility functions."""
 
 
+import re
+
+
 # Remove duplicates from a sequence while maintaining order
 def remove_duplicates(items):
     """Remove duplicates from a sequence while maintaining order.
@@ -32,7 +35,7 @@ def remove_duplicates(items):
     >>> ''.join(utils.remove_duplicates(s))
     'cvsfd'
 
-    :param items iterable: A sequence contains duplicated item
+    :param iterable items: A sequence contains duplicated item
     :return: A generator with duplicated item removed
     :rtype: generator
     """
@@ -49,7 +52,7 @@ def remove_duplicates_unhashable(items, key=None):
     maintaining order
 
 
-    :param items iterable: A sequence contains duplicated item
+    :param iterable items: A sequence contains duplicated item
     :return: A generator with duplicated item removed
     :rtype: generator
     """
@@ -59,3 +62,25 @@ def remove_duplicates_unhashable(items, key=None):
         v = item if key is None else key(item)
         if v not in rslt:
             rslt.add(v)
+
+
+class Sentence(object):
+    """Class to represent an English sentence.
+
+    A `__getitem__` method is implemented to make Sentence iterable.
+
+    """
+
+    def __init__(self, s):
+        RE_WORD = re.compile(r'\w+')
+        self.txt = s
+        self.words = RE_WORD.findall(self.txt)
+
+    def __getitem__(self, index):
+        return self.words[index]
+
+    def __len__(self):
+        return len(self.words)
+
+    def __repr__(self):
+        return "Sentens('{0}')".format(self.txt)

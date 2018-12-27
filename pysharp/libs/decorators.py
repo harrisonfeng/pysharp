@@ -26,6 +26,8 @@ LOG = logging.getLogger(__name__)
 
 
 def time_func(f):
+    """Decorator to time the function."""
+
     @wraps(f)
     def wrapper(*args, **kwargs):
         st = time.time()
