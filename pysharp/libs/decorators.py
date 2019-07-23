@@ -16,6 +16,24 @@
 # limitations under the License.
 
 
+"""Decorator classes and functions
+
+**Functions**
+
+.. autosummary::
+    :nosignatures:
+
+        time_the_func
+        since
+
+**Classes**
+
+.. autosummary::
+    :nosignatures:
+
+"""
+
+
 import time
 import logging
 
@@ -25,7 +43,7 @@ from functools import wraps
 LOG = logging.getLogger(__name__)
 
 
-def time_func(f):
+def time_the_func(f):
     """Decorator to time the function."""
 
     @wraps(f)
@@ -38,4 +56,20 @@ def time_func(f):
             et - st)
         )
         return rf
+    return wrapper
+
+
+def since(version):
+    """A decorator that annotates a function to append the version when the
+    function was added."""
+
+    import re
+    indent_p = re.compile(r'\n( +)')
+
+    def wrapper(f):
+        indents = indent_p.findall(f.__doc__)
+        indent = ' ' * (min(len(ind) for ind in indents) if indents else 0)
+        ver_anno = '\n\n{0}.. versionadded:: {1}'.format(indent, version)
+        f.__doc__ = ''.join([f.__doc__.rstrip(), ver_anno])
+        return f
     return wrapper

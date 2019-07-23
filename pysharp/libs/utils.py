@@ -15,29 +15,51 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""pysharp.libs.utils module for various useful utility functions."""
+
+"""Various useful utility classes and functions.
+
+**Functions**
+
+.. autosummary::
+    :nosignatures:
+
+        remove_duplicates
+        remove_duplicates_unhashable
+
+**Classes**
+
+.. autosummary::
+    :nosignatures:
+
+        Sentence
+
+"""
 
 
 import re
+from pysharp.libs.decorators import since
 
 
 # Remove duplicates from a sequence while maintaining order
+@since('0.0.1')
 def remove_duplicates(items):
     """Remove duplicates from a sequence while maintaining order.
 
-
-    >>> from pysharp.libs.utils import remove_duplicates
-    >>> l = ['a','b', 'a', 'e', 'f', 'b']
-    >>> list(utils.remove_duplicates(l))
-    ['a', 'b', 'e', 'f']
-
-    >>> s = 'cvsfdfsdfsf'
-    >>> ''.join(utils.remove_duplicates(s))
-    'cvsfd'
-
-    :param iterable items: A sequence contains duplicated item
-    :return: A generator with duplicated item removed
+    :param iterable items: A sequence contains duplicated item.
+    :return: A generator with duplicated item removed.
     :rtype: generator
+
+    Usage::
+
+      >>> from pysharp.libs.utils import remove_duplicates
+      >>> l = ['a','b', 'a', 'e', 'f', 'b']
+      >>> list(utils.remove_duplicates(l))
+      ['a', 'b', 'e', 'f']
+
+      >>> s = 'cvsfdfsdfsf'
+      >>> ''.join(utils.remove_duplicates(s))
+      'cvsfd'
+
     """
 
     rslt = set()
@@ -47,6 +69,7 @@ def remove_duplicates(items):
             rslt.add(item)
 
 
+@since('0.0.1')
 def remove_duplicates_unhashable(items, key=None):
     """Remove duplicates with unhashable item contained from a sequence while
     maintaining order
@@ -67,7 +90,7 @@ def remove_duplicates_unhashable(items, key=None):
 class Sentence(object):
     """Class to represent an English sentence.
 
-    A `__getitem__` method is implemented to make Sentence iterable.
+    A ``__getitem__`` method is implemented to make Sentence iterable.
 
     """
 

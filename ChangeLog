@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* create python docs for pysharp project
 * create decorators model
 * Initial commit
 * restructure the project and create utils module

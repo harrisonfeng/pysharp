@@ -1,0 +1,4 @@
+pysharp
+=======
+
+.. automodule:: pysharp
